@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.luisdbb.tarea3AD2024base.controller.LoginNuevoController">
+   <children>
+      <ImageView fitHeight="520.0" fitWidth="850.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fondos%20app/grad1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="520.0" fitWidth="850.0" opacity="0.25" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fondos%20app/slice1.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0000004b" height="410.0" layoutX="260.0" layoutY="55.0" stroke="#38bada" strokeType="INSIDE" strokeWidth="3.0" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="330.0" />
+      <VBox layoutX="260.0" layoutY="55.0" prefHeight="410.0" prefWidth="330.0">
+         <children>
+            <StackPane prefHeight="137.0" prefWidth="330.0">
+               <children>
+                  <Circle fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                  <ImageView fitHeight="61.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/iconos/senderismo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <FlowPane alignment="TOP_CENTER" prefHeight="40.0" prefWidth="330.0">
+               <children>
+                  <Label fx:id="lblTitulo" text="Iniciar Sesion" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+            <GridPane prefHeight="118.0" prefWidth="330.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="67.0" />
+                <ColumnConstraints fillWidth="false" halignment="LEFT" maxWidth="263.0" minWidth="10.0" prefWidth="263.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="usufield" prefHeight="28.0" prefWidth="220.0" promptText="Nombre de Usuario" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 3 0; -fx-text-fill: white;" GridPane.columnIndex="1" />
+                  <TextField fx:id="contrafield" prefWidth="220.0" promptText="Contraseña" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 3 0; -fx-text-fill: white;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Circle fill="WHITE" radius="17.0" stroke="BLACK" strokeType="INSIDE" />
+                        <ImageView fitHeight="27.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconos/usuario.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Circle fill="WHITE" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
+                        <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iconos/llave.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+               </children>
+            </GridPane>
+            <GridPane prefHeight="30.0" prefWidth="324.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Hyperlink text="¿No tienes cuenta todavia?" />
+                  <Hyperlink text="¿Has olvidado tu contraseña?" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
+            <FlowPane alignment="BOTTOM_CENTER" prefHeight="38.0" prefWidth="330.0">
+               <children>
+                  <Button onAction="#login" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" text="Iniciar sesion" textFill="WHITE" />
+               </children>
+            </FlowPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
