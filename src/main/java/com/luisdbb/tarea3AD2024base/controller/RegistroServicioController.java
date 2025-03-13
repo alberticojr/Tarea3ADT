@@ -13,7 +13,6 @@ import com.luisdbb.tarea3AD2024base.config.StageManager;
 import com.luisdbb.tarea3AD2024base.modelo.ObsListaParadas;
 import com.luisdbb.tarea3AD2024base.modelo.Parada;
 import com.luisdbb.tarea3AD2024base.modelo.Servicio;
-import com.luisdbb.tarea3AD2024base.services.AlertasServices;
 import com.luisdbb.tarea3AD2024base.services.DB4OService;
 import com.luisdbb.tarea3AD2024base.services.ParadaService;
 import com.luisdbb.tarea3AD2024base.services.ValidacionesService;
@@ -77,6 +76,11 @@ public class RegistroServicioController implements Initializable{
 	
 	private ObservableList<Long> selectedIds = FXCollections.observableArrayList();
 	
+// 	Método para obtener los IDs seleccionados desde otro lugar si es necesario
+//	public ObservableList<Long> getSelectedIds() {
+//		return selectedIds;
+//	}
+	
 	@FXML
 	private void pulsaCrear () {
 		String nombreServicio = fieldNombreServicio.getText();
@@ -97,6 +101,8 @@ public class RegistroServicioController implements Initializable{
 			}
 		}
 		
+				
+		if (selectedIds.size() != 0 ) {
 			if (nombreValido) {
 				if (!nombreRepetido) {
 					if (numeroValido) {
@@ -107,39 +113,25 @@ public class RegistroServicioController implements Initializable{
 						servicio.setId(db4oService.findServicioLastId());
 						servicio.setNombre(nombreServicio);
 						servicio.setPrecio(Doubleprecio);
-						
-						if (selectedIds.size() != 0) {
-							for (Long idParada : selectedIds) {
-								servicio.getIdListaParadas().add(idParada);
-							}
+
+						for (Long idParada : selectedIds) {
+							servicio.getIdListaParadas().add(idParada);
 						}
 
 						db4oService.crearServicio(servicio);
-						
-						AlertasServices.altGeneralInformation(
-								"Servicio Creado",
-								"Servicio Creado",
-								"El servicio se ha creado correctamente");
 
 					} else {
-						AlertasServices.altGeneralWarning(
-								"Cantidad no valida",
-								"Cantidad no valida",
-								"El precio del servicio debe contener solo numeros y dos decimales.");
-						
+						System.out.println("numero no valido");
 					}
 				} else {
-					AlertasServices.altGeneralWarning(
-							"Nombre repetido",
-							"Nombre repetido",
-							"El nombre del servicio ya existe en el sistema");
+					System.out.println("nombre repetido");
 				}
 			} else {
-				AlertasServices.altGeneralWarning(
-						"Nombre no valido",
-						"Nombre no valido",
-						"El nombre del servicio no puede contener numeros");
+				System.out.println("nombre no valido");
 			}
+		} else {
+			System.out.println("No has seleccionado ninguna Parada");
+		}
 		
 	}
 	
@@ -173,10 +165,7 @@ public class RegistroServicioController implements Initializable{
 			
 		}
 		catch (NullPointerException e) {
-			AlertasServices.altGeneralWarning(
-					"No se encuentra el HTML",
-					"No se encuentra el HTML",
-					"El sistema no fue capaz de encontrar el HTML");
+			System.out.print("No se ha encontrado el HTML");
 		}
 	}
 	
@@ -222,7 +211,7 @@ public class RegistroServicioController implements Initializable{
 						selectedIds.add(paradasSeleccionada.getId());
 					}
 					
-					//System.out.println("IDs seleccionados: " + selectedIds);
+					System.out.println("IDs seleccionados: " + selectedIds);
 				});
 	}
 	

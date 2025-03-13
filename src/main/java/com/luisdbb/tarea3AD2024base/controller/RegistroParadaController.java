@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 
 import com.luisdbb.tarea3AD2024base.config.StageManager;
+import com.luisdbb.tarea3AD2024base.modelo.ConexiónExistDB;
 import com.luisdbb.tarea3AD2024base.modelo.Credenciales;
 import com.luisdbb.tarea3AD2024base.modelo.Parada;
 import com.luisdbb.tarea3AD2024base.services.AlertasServices;
 import com.luisdbb.tarea3AD2024base.services.CredencialesService;
+import com.luisdbb.tarea3AD2024base.services.ExistDBService;
 import com.luisdbb.tarea3AD2024base.services.ParadaService;
 import com.luisdbb.tarea3AD2024base.services.ValidacionesService;
 import com.luisdbb.tarea3AD2024base.view.FxmlView;
@@ -53,6 +55,9 @@ public class RegistroParadaController implements Initializable{
 	
 	@Autowired
 	private CredencialesService credencialeService;
+	
+	@Autowired
+	private ExistDBService existdbService;
 	
 	@FXML
 	private void pulsaCrearParada(ActionEvent event) throws IOException {
@@ -120,7 +125,18 @@ public class RegistroParadaController implements Initializable{
 	
 	@FXML
 	private void volver(ActionEvent event) throws IOException {
-		stageManager.switchScene(FxmlView.MenuAdministrador);
+		//stageManager.switchScene(FxmlView.MenuAdministrador);
+		try {
+			
+			existdbService.crearSubColeccion("calvo");
+			
+			//conexiónExistDB.storeXML();
+			//conexiónExistDB.createCollection(nombrePaField.getText());
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

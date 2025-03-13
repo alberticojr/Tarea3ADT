@@ -25,7 +25,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
 @Controller
 public class MenuResponsableController implements Initializable{
 	
@@ -105,7 +104,6 @@ public class MenuResponsableController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		par = paradaService.findByResponsable(LoginNuevoController.sesion.getNombre());
 		
 		URL linkAyuda = getClass().getResource("/images/iconos/informacion.png");
 		Image imgAyuda = new Image(linkAyuda.toString(),30, 30, false, true);

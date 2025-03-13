@@ -174,113 +174,74 @@ public class SellarCarnetController implements Initializable{
 			}
 			
 			if (!selloRepetido) {
-				PeregrinoParada PP = new PeregrinoParada(peregrino, parada, Date.valueOf(LocalDate.now()));
-				Estancia estancia = new Estancia(parada.getNombre(), Date.valueOf(LocalDate.now()), true, peregrino, parada);
-
-				peregrino.getPeregrinoParada().add(PP);
-				peregrino.getListaEstancia().add(estancia);
-
-				double distActual = peregrino.getCarnet().getDistancia();
-				int vipstActual = peregrino.getCarnet().getNvips();
-
-				peregrino.getCarnet().setDistancia(distActual + 10.0);
-				peregrino.getCarnet().setNvips(vipstActual + 1);
-
-				if (selectedIds.size() == 0) {
-					
-					AlertasServices.altGeneralWarning(
-							"Servicios vacio",
-							"Servicios vacio",
-							"No se ha seleccionado ningun servicio");
-					
-				} else {
-
-					boolean envioValido = crearEnvioACasa();
-
-					if (envioValido) {
-
-						peregrinoService.save(peregrino);
-						crearConjuntoContratado(estanciaService.findLastId());
-						
-						AlertasServices.altGeneralInformation(
-								"Sellado correcto",
-								"Sellado correcto",
-								"El carnet se ha sellado correctamente");
-
-					} else {
-						AlertasServices.altGeneralWarning(
-								"Envio invalido",
-								"Envio invalido",
-								"Has escrito algun campo invalido en -Envio a casa-");
-					}
-				}
-
+			PeregrinoParada PP = new PeregrinoParada(peregrino, parada, Date.valueOf(LocalDate.now()));
+			Estancia estancia = new Estancia(parada.getNombre(),Date.valueOf(LocalDate.now()), true, peregrino, parada);
+			
+			peregrino.getPeregrinoParada().add(PP);
+			peregrino.getListaEstancia().add(estancia);
+			
+			double distActual = peregrino.getCarnet().getDistancia();
+			int vipstActual = peregrino.getCarnet().getNvips();
+			
+			peregrino.getCarnet().setDistancia(distActual+10.0);
+			peregrino.getCarnet().setNvips(vipstActual+1);
+			
+			
+			if (selectedIds.size() == 0) {
+				System.out.println("No has escogido ningun servicio");
 			} else {
+				peregrinoService.save(peregrino);
+
+				crearConjuntoContratado(estanciaService.findLastId());
+				crearEnvioACasa();
+			}
+			
+			}
+			else {
 				AlertasServices.altSellarInvalido();
 			}
 		}
 		
 		//SELLAR CON ESTANCIA - SERVICIO - ENVIO A CASA
 		else if (coBoxPeregrino != null && chBoxEstancia.isSelected() && chBoxServicio.isSelected() && EnvioACasa) {
-
+			
 			String[] datosPeregrino = coBoxPeregrino.getValue().split(" ");
 			String nombrePeregrino = datosPeregrino[2];
-
+			
 			Peregrino peregrino = peregrinoService.findByNombre(nombrePeregrino);
-
+			
 			boolean selloRepetido = false;
 			LocalDate fechaActual = LocalDate.now();
-
-			for (PeregrinoParada PP : listaPP) {
+			
+			for (PeregrinoParada PP: listaPP) {
 				LocalDate fechaPP = PP.getFecha().toLocalDate();
-				if (fechaPP.isEqual(fechaActual) && PP.getPeregrino().getId() == peregrino.getId()
-						&& PP.getParada().getId() == parada.getId()) {
+				if (fechaPP.isEqual(fechaActual) && PP.getPeregrino().getId() == peregrino.getId() && PP.getParada().getId() == parada.getId()) {
 					selloRepetido = true;
 				}
 			}
-
+			
 			if (!selloRepetido) {
-				PeregrinoParada PP = new PeregrinoParada(peregrino, parada, Date.valueOf(LocalDate.now()));
-				Estancia estancia = new Estancia(parada.getNombre(), Date.valueOf(LocalDate.now()), false, peregrino,
-						parada);
-
-				peregrino.getPeregrinoParada().add(PP);
-				peregrino.getListaEstancia().add(estancia);
-
-				double distActual = peregrino.getCarnet().getDistancia();
-				peregrino.getCarnet().setDistancia(distActual + 10.0);
-
-				if (selectedIds.size() == 0) {
-					
-					AlertasServices.altGeneralWarning(
-							"Servicios vacio",
-							"Servicios vacio",
-							"No se ha seleccionado ningun servicio");
-					
-				} else {
-
-					boolean envioValido = crearEnvioACasa();
-
-					if (envioValido) {
-
-						peregrinoService.save(peregrino);
-						crearConjuntoContratado(estanciaService.findLastId());
-						
-						AlertasServices.altGeneralInformation(
-								"Sellado correcto",
-								"Sellado correcto",
-								"El carnet se ha sellado correctamente");
-					}
-					else {
-						
-						AlertasServices.altGeneralWarning(
-								"Envio invalido",
-								"Envio invalido",
-								"Has escrito algun campo invalido en -Envio a casa-");
-					}
-				}
-
+			PeregrinoParada PP = new PeregrinoParada(peregrino, parada, Date.valueOf(LocalDate.now()));
+			Estancia estancia = new Estancia(parada.getNombre(),Date.valueOf(LocalDate.now()), false, peregrino, parada);
+			
+			
+			peregrino.getPeregrinoParada().add(PP);
+			peregrino.getListaEstancia().add(estancia);
+			
+			double distActual = peregrino.getCarnet().getDistancia();
+			peregrino.getCarnet().setDistancia(distActual+10.0);
+			
+			if (selectedIds.size() == 0) {
+				System.out.println("No has escogido ningun servicio");
 			} else {
+				peregrinoService.save(peregrino);
+
+				crearConjuntoContratado(estanciaService.findLastId());
+				crearEnvioACasa();
+			}
+			
+			}
+			else {
 				AlertasServices.altSellarInvalido();
 			}
 
@@ -316,20 +277,11 @@ public class SellarCarnetController implements Initializable{
 				peregrino.getCarnet().setDistancia(distActual + 10.0);
 
 				if (selectedIds.size() == 0) {
-					
-					AlertasServices.altGeneralWarning(
-							"Servicios vacio",
-							"Servicios vacio",
-							"No se ha seleccionado ningun servicio");
+					System.out.println("No has escogido ningun servicio");
 				} else {
-					
 					peregrinoService.save(peregrino);
+
 					crearConjuntoContratado(estanciaService.findLastId());
-					
-					AlertasServices.altGeneralInformation(
-							"Sellado correcto",
-							"Sellado correcto",
-							"El carnet se ha sellado correctamente");
 				}
 
 			} else {
@@ -370,11 +322,6 @@ public class SellarCarnetController implements Initializable{
 
 				peregrinoService.save(peregrino);
 				
-				AlertasServices.altGeneralInformation(
-						"Sellado correcto",
-						"Sellado correcto",
-						"El carnet se ha sellado correctamente");
-				
 
 			} else {
 				AlertasServices.altSellarInvalido();
@@ -413,11 +360,6 @@ public class SellarCarnetController implements Initializable{
 				peregrino.getCarnet().setDistancia(distActual + 10.0);
 
 				peregrinoService.save(peregrino);
-				
-				AlertasServices.altGeneralInformation(
-						"Sellado correcto",
-						"Sellado correcto",
-						"El carnet se ha sellado correctamente");
 				
 
 			} else {
@@ -464,6 +406,7 @@ public class SellarCarnetController implements Initializable{
 	
 	public void crearConjuntoContratado (long idEstancia) {
 		String[] metodoPago = coBoxTipoPago.getValue().split(" ");
+		System.out.println(metodoPago[0]);
 		
 		String extra = txtAreaExtra.getText();
 		
@@ -486,17 +429,13 @@ public class SellarCarnetController implements Initializable{
 		conjuntoContratado.setPrecioTotal(Double.parseDouble(df.format(precioTotal).replace(",", ".")));
 		
 		db4oService.crearConjuntoContratado(conjuntoContratado);
+		System.out.println(conjuntoContratado.toString());
 		
-		AlertasServices.altGeneralInformation(
-				"Conjunto Contratado creado",
-				"Conjunto Contratado creado",
-				conjuntoContratado.toString());
 	}
 	
 	EntityManager conexionOBD = ConexionObjectDB.getInstance();
 	
-	public boolean crearEnvioACasa () {
-		boolean envioValido = false;
+	public void crearEnvioACasa () {
 		
 		String direccion = fieldDireccion.getText();
 		String localidad = fieldLocalidad.getText();
@@ -536,30 +475,23 @@ public class SellarCarnetController implements Initializable{
 
 					objectDBService.crearEnvioACasa(envio);
 					
-					envioValido = true;
-					
 				}
 				else {
-					AlertasServices.altGeneralWarning(
-							"Localidad incorrecta",
-							"Localidad incorrecta",
-							"La localidad solo puede contener letras y espacios");
+					System.out.println("La localidad solo puede contener letras y espacios");
 				}
+				
 			}
 			else {
-				AlertasServices.altGeneralWarning(
-						"Campos vacios",
-						"Campos vacios",
-						"Has dejado en blanco los campos de -Direccion- o -Localidad-");
+				System.out.println("Direccion o localidad vacios");
 			}
+
 		} else {
-			AlertasServices.altGeneralWarning(
-					"Cantidades no validas",
-					"Cantidades no validas",
-					"El precio del servicio debe contener solo numeros y dos decimales.\nY los datos del volumen tienen que se un numero entero");
+			System.out.println("numeros no validos");
 		}
 		
-		return envioValido;
+		
+		
+		
 	}
 	
 	
@@ -590,10 +522,7 @@ public class SellarCarnetController implements Initializable{
 			
 		}
 		catch (NullPointerException e) {
-			AlertasServices.altGeneralWarning(
-					"No se encuentra el HTML",
-					"No se encuentra el HTML",
-					"El sistema no fue capaz de encontrar el HTML");
+			System.out.print("No se ha encontrado el HTML");
 		}
 	}
 	
@@ -666,23 +595,17 @@ public class SellarCarnetController implements Initializable{
 		
 		ObservableList<Servicio> ObservableListaServicios = FXCollections.observableArrayList();
 		
-		if (listaServicios != null) {
-			for (Servicio s : listaServicios) {
-				
-				for (Long idParadaServicio: s.getIdListaParadas()) {
-					if (idParadaServicio == parada.getId()) {
-						ObservableListaServicios.add(s);
-					}
+		for (Servicio s : listaServicios) {
+			
+			for (Long idParadaServicio: s.getIdListaParadas()) {
+				if (idParadaServicio == parada.getId()) {
+					ObservableListaServicios.add(s);
 				}
 			}
-		}
-		else {
-			AlertasServices.altGeneralWarning(
-					"Servicios no disponibles",
-					"Servicios no disponibles",
-					"No hay servicios disponibles en el sistema");
-		}
+
+			
 		
+		}
 		
 		tableServicios.setItems(ObservableListaServicios);
 		
@@ -718,8 +641,10 @@ public class SellarCarnetController implements Initializable{
 				cheBoxUrgente.setSelected(false);
 			}
 
-			//DecimalFormat df = new DecimalFormat("#.##");
-			//System.out.println("IDs seleccionados: " + selectedIds + "| total: " + df.format(precioTotal).replace(",", "."));
+			DecimalFormat df = new DecimalFormat("#.##");
+
+			System.out.println(
+					"IDs seleccionados: " + selectedIds + "| total: " + df.format(precioTotal).replace(",", "."));
 		});
 		
 		

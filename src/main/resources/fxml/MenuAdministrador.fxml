@@ -47,9 +47,7 @@
                   </FlowPane>
                </children>
             </FlowPane>
-
             <GridPane prefHeight="297.0" prefWidth="800.0">
-
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
@@ -60,14 +58,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-
                   <Button onAction="#pulsaCrear" prefWidth="300.0" style="-fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" styleClass="button" text="_Registrar nueva Parada" textFill="WHITE">
-
                      <font>
                         <Font name="Segoe UI Black" size="20.0" />
                      </font>
                   </Button>
-
                   <Button mnemonicParsing="false" onAction="#logout" prefWidth="300.0" style="-fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" styleClass="button" text="Cerrar Sesión" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font name="Segoe UI Black" size="20.0" />
@@ -79,7 +74,6 @@
                      </font>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#pulsaEditarServicio" prefWidth="300.0" style="-fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" styleClass="button" text="Editar Servicios" textFill="WHITE" GridPane.rowIndex="2">
-
                      <font>
                         <Font name="Segoe UI Black" size="20.0" />
                      </font>

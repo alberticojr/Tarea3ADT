@@ -169,22 +169,6 @@ public class AlertasServices {
         alert.setContentText("Las contraseñas introducidas no coniciden");
         alert.showAndWait();
     }
-	
-	public static void altGeneralWarning (String titulo, String header, String texto) {
-		Alert alert = new Alert(AlertType.WARNING);
-        alert.setTitle(titulo);
-        alert.setHeaderText(header);
-        alert.setContentText(texto);
-        alert.showAndWait();
-	}
-	public static void altGeneralInformation (String titulo, String header, String texto) {
-		Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(header);
-        alert.setContentText(texto);
-        alert.showAndWait();
-	}
-	
 	public static void altPeregrinoEditado() {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Edicion correcta");

@@ -1,6 +1,7 @@
 package com.luisdbb.tarea3AD2024base.controller;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -8,9 +9,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xmldb.api.base.Collection;
+import org.xmldb.api.base.Resource;
+import org.xmldb.api.base.XMLDBException;
+import org.xmldb.api.modules.XMLResource;
 
 import com.luisdbb.tarea3AD2024base.config.StageManager;
 import com.luisdbb.tarea3AD2024base.modelo.Carnet;
@@ -20,10 +38,10 @@ import com.luisdbb.tarea3AD2024base.modelo.Peregrino;
 import com.luisdbb.tarea3AD2024base.modelo.PeregrinoParada;
 import com.luisdbb.tarea3AD2024base.services.AlertasServices;
 import com.luisdbb.tarea3AD2024base.services.CredencialesService;
+import com.luisdbb.tarea3AD2024base.services.ExistDBService;
 import com.luisdbb.tarea3AD2024base.services.ParadaService;
 import com.luisdbb.tarea3AD2024base.services.PeregrinoService;
 import com.luisdbb.tarea3AD2024base.services.ValidacionesService;
-import com.luisdbb.tarea3AD2024base.view.FxmlView;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,6 +94,9 @@ public class RegistroPeregrinoController implements Initializable{
 	
 	@Autowired
 	private CredencialesService credencialeService;
+	
+	@Autowired
+	private ExistDBService existdbService;
 	
 	
 	@FXML
@@ -169,6 +190,41 @@ public class RegistroPeregrinoController implements Initializable{
 
 	}
 	
+	private void persirtirXML() {
+
+		Collection col = existdbService.getSubColeccion("gigia");
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder;
+
+		try {
+			builder = factory.newDocumentBuilder();
+			Document doc = builder.newDocument();
+
+			Element root = doc.createElement("Peregrino");
+			doc.appendChild(root);
+
+			Element nombre = doc.createElement("Nombre");
+			nombre.appendChild(doc.createTextNode("Alicia"));
+			root.appendChild(nombre);
+
+			Element edad = doc.createElement("Edad");
+			edad.appendChild(doc.createTextNode("25"));
+			root.appendChild(edad);
+
+			// Guardar en eXistDB
+			XMLResource res = (XMLResource) col.createResource("peregrino.xml", "XMLResource");
+			res.setContentAsDOM(doc);
+
+			col.storeResource(res);
+			System.out.println("XML almacenado correctamente en eXistDB.");
+
+		} catch (ParserConfigurationException | XMLDBException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 	
 	@Lazy
     @Autowired
@@ -177,10 +233,12 @@ public class RegistroPeregrinoController implements Initializable{
 	@FXML
 	private void logout(ActionEvent event) throws IOException {
 		
-		LoginNuevoController.sesion.setNombre("invitado");
-		LoginNuevoController.sesion.setPerfil("invitado");
+		persirtirXML();
 		
-		stageManager.switchScene(FxmlView.LOGIN);
+//		LoginNuevoController.sesion.setNombre("invitado");
+//		LoginNuevoController.sesion.setPerfil("invitado");
+//		
+//		stageManager.switchScene(FxmlView.LOGIN);
 	}
 	
 	@FXML

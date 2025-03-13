@@ -75,9 +75,9 @@
                               <GridPane prefHeight="223.0" prefWidth="398.0">
                                 <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.0" minWidth="10.0" prefWidth="65.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="183.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="105.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="44.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="195.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="69.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="65.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -137,9 +137,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-
                         <Button onAction="#exportarCarnet" prefWidth="300.0" style="-fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" styleClass="button" text="_Exportar Carnet" textFill="WHITE" GridPane.rowIndex="2">
-
                            <font>
                               <Font name="Segoe UI Black" size="20.0" />
                            </font>
@@ -150,7 +148,6 @@
                            </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#logout" prefWidth="300.0" style="-fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" styleClass="button" text="Cerrar Sesión" textFill="WHITE" GridPane.rowIndex="3">
-
                            <font>
                               <Font name="Segoe UI Black" size="20.0" />
                            </font>

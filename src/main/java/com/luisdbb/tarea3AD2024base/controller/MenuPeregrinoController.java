@@ -47,7 +47,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-
 @Controller
 public class MenuPeregrinoController implements Initializable{
 	
@@ -121,7 +120,7 @@ public class MenuPeregrinoController implements Initializable{
 	private void pulsaVerCarnet () {
 		
 	}
-
+	
 	Peregrino p;
 	
 	@FXML
@@ -262,15 +261,12 @@ public class MenuPeregrinoController implements Initializable{
 		}
 		catch (ParserConfigurationException ex) { System.out.println("Error: " + ex.getMessage()); }
 		catch (TransformerException e) { e.printStackTrace(); }
-
 		
 		AlertasServices.altExportacionCorrecta();
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		p = peregrinoService.findByNombre(LoginNuevoController.sesion.getNombre());
-
 		
 		URL linkAyuda = getClass().getResource("/images/iconos/informacion.png");
 		Image imgAyuda = new Image(linkAyuda.toString(),30, 30, false, true);
@@ -279,11 +275,9 @@ public class MenuPeregrinoController implements Initializable{
 		
 		p = peregrinoService.findByNombre(LoginNuevoController.sesion.getNombre());
 		
-
 		lblId.setText(p.getId()+"");
 		lblNombreCom.setText(p.getNombre_completo());
 		lblNombreUsu.setText(p.getNombre());
 		lblNacionalidad.setText(p.getNacionalidad());
 	}
-
 }

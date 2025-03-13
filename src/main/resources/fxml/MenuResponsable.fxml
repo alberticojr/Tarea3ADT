@@ -139,13 +139,11 @@
                      </rowConstraints>
                      <children>
                         <Button onAction="#pulsaSellar" prefWidth="300.0" style="-fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" styleClass="button" text="_Sellar Carnet" textFill="WHITE" GridPane.rowIndex="2">
-
                            <font>
                               <Font name="Segoe UI Black" size="20.0" />
                            </font>
                         </Button>
                         <Button onAction="#pulsaExportar" prefWidth="300.0" style="-fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" styleClass="button" text="_Exportar Datos de parada" textFill="WHITE" GridPane.rowIndex="1">
-
                            <font>
                               <Font name="Segoe UI Black" size="20.0" />
                            </font>
@@ -156,7 +154,6 @@
                            </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#PulsaVerLista" prefWidth="300.0" style="-fx-border-color: #38bada; -fx-border-width: 2; -fx-border-radius: 5;" styleClass="button" text="Ver Lista de Envios" textFill="WHITE" GridPane.rowIndex="3">
-
                            <font>
                               <Font name="Segoe UI Black" size="20.0" />
                            </font>

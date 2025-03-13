@@ -14,7 +14,7 @@ public class EnvioACasa extends Servicio{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 	
 	private double peso;
 	private int[] volumen = new int [3];
@@ -102,10 +102,6 @@ public class EnvioACasa extends Servicio{
 
 	public void setIdParada(Long idParada) {
 		this.idParada = idParada;
-	}
-	
-	public String volumenAString () {
-		return volumen[0]+" | "+volumen[1]+" | "+volumen[2];
 	}
 
 	@Override
